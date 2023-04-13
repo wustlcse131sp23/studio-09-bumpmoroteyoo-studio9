@@ -1,26 +1,43 @@
 package studio9;
 
+import java.util.Map;
+import java.util.HashMap;
+
 import assignment7.Student;
 
+
 public class UniversityDatabase {
-	//TODO: Complete this class according to the studio instructions
+private final Map<String, Student> studentX; //can't initialize another map to use in its place -- "final"
+
+	public UniversityDatabase() {
+		this.studentX = new HashMap<>();
+}
 
 	public void addStudent(String accountName, Student student) {
-		// TODO
+		studentX.put(accountName, student);
 	}
 
 	public int getStudentCount() {
-		// TODO
-		return 0;
+		return studentX.size();
 	}
 
 	public String lookupFullName(String accountName) {
-		// TODO: Complete according to studio instructions
-		return null;
-	}
+		Student student = studentX.get(accountName); // lower case "student" here is from the parameter above in addStudent
+		if (student == null) {
+			return null;
+		}
+		else {
+			return student.getFullName(); // using the "student" that met the non-null condition
+			}
+		}
 
 	public double getTotalBearBucks() {
 		// TODO
-		return 0.0;
+		double sum = 0; 
+		for(String z: studentX.keySet()) {
+			Student student = studentX.get(z);
+			sum += student.getBearBucksBalance();	
+		}	
+		return sum;
 	}
 }
